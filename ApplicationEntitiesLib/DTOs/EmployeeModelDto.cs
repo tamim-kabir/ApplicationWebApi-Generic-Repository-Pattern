@@ -1,7 +1,10 @@
-﻿namespace ApplicatinoDataAccess.DTOs
+﻿using ApplicationEntitiesLib.Employee;
+
+namespace ApplicatinoDataAccess.DTOs
 {
-    public class EmployeeModelDto
+    public class EmployeeModelDto 
     {
+        
         public int ID { get; set; }
         public string EmpName { get; set; }
         public string Occopation { get; set; }

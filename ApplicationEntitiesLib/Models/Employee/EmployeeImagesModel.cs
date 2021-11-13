@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApplicationEntitiesLib.Employee
 {
-    public class EmployeeImagesModel
+    public class EmployeeImagesModel 
     {
         [Key]
         [Required]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Column(TypeName = "varchar(50)")]
         public string ImgPath { get; set; }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Application.Controllers
 {
@@ -22,7 +21,7 @@ namespace Application.Controllers
         }
         // GET: api/<EmployeeController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> GetAll()
+        public async Task<ActionResult<IEnumerable<TDto>>> GetAll()
         {
             var emp = await _repo.GetAllRecords();
 
@@ -39,5 +38,26 @@ namespace Application.Controllers
             return NotFound();
         }
 
+        [HttpPost]
+        public async Task<ActionResult<TDto>> Create(TDto DtoEnbtity)
+        {
+            var Entitry = _mapper.Map<T>(DtoEnbtity);
+            await _repo.CreateNewRecord(Entitry);
+            var createDto = _mapper.Map<TDto>(Entitry);
+            return NoContent();//CreatedAtRoute(nameof(GetById), new { Id = createDto.ID }, createDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateEntitry(int id, TDto dto)
+        {
+            var Entitry = await _repo.GetRecordById(id);
+            if(Entitry == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(dto, Entitry);
+            await _repo.UpdateRecord(Entitry);
+            return NoContent();
+        }
     }
 }
