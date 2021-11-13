@@ -7,7 +7,7 @@ namespace ApplicatinoDataAccess
 {
     public class BaseRepo<T, TC> : IBaseRepo<T> where T : class where TC : DbContext
     {
-        private readonly DbSet<T> _ContextSet; 
+        private readonly DbSet<T> _ContextSet;
         private readonly TC _Context;
         public BaseRepo(TC conbtext)
         {

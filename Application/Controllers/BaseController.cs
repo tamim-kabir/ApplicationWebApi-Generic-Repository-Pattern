@@ -1,10 +1,7 @@
-﻿using ApplicatinoDataAccess.DTOs;
-using ApplicationEntitiesLib;
+﻿using ApplicationEntitiesLib;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,7 +10,7 @@ namespace Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<T, TRepo, TDto> : ControllerBase where  T: class where TRepo: IBaseRepo<T>
+    public class BaseController<T, TRepo, TDto> : ControllerBase where T : class where TRepo : IBaseRepo<T>
     {
         private readonly TRepo _repo;
         private readonly IMapper _mapper;

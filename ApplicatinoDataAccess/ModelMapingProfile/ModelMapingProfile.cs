@@ -1,5 +1,5 @@
-﻿using ApplicationEntitiesLib.Employee;
-using ApplicatinoDataAccess.DTOs;
+﻿using ApplicatinoDataAccess.DTOs;
+using ApplicationEntitiesLib.Employee;
 using AutoMapper;
 
 namespace ApplicatinoDataAccess.ModelMapingProfile

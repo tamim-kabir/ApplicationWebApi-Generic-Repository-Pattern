@@ -5,7 +5,7 @@ namespace ApplicatinoDataAccess.Repository
 {
     public class EmployeeRepo : BaseRepo<EmployeeModel, ApplicationDBContext>
     {
-        public EmployeeRepo(ApplicationDBContext context):  base(context)
+        public EmployeeRepo(ApplicationDBContext context) : base(context)
         {
         }
 
