@@ -1,4 +1,4 @@
-﻿using ApplicatinoDataAccess.DTOs;
+﻿using ApplicationEntitiesLib.DTOs;
 using ApplicationEntitiesLib.Employee;
 using AutoMapper;
 
@@ -13,6 +13,8 @@ namespace ApplicatinoDataAccess.ModelMapingProfile
             CreateMap<EmployeeModel, EmployeeModelDto>();
 
             CreateMap<EmployeeModelDto, EmployeeModel>();
+
+            CreateMap<EmployeeImagesModel, EmployeeImageDto>();
         }
     }
 }

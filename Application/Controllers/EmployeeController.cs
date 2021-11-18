@@ -1,5 +1,5 @@
-﻿using ApplicatinoDataAccess.DTOs;
-using ApplicatinoDataAccess.Repository;
+﻿using ApplicatinoDataAccess.Repository;
+using ApplicationEntitiesLib.DTOs;
 using ApplicationEntitiesLib.Employee;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;

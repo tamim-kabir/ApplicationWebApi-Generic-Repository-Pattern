@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApplicationEntitiesLib.Employee
 {
-    public class EmployeeImagesModel 
+    public class EmployeeImagesModel
     {
         [Key]
         [Required]
