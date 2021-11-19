@@ -28,7 +28,7 @@ namespace Application.Controllers
         }
 
         [HttpPost]
-        [Route("/UploadEmpImage")]
+        [Route("[action]")]
         public async Task<string> UploadEmpImage()
         {
             try
@@ -42,7 +42,7 @@ namespace Application.Controllers
                     {
                         Img.ImgPath = await UploadImage(file);
                     }
-                    await _frepo.SaveChange();
+                    await _frepo.CreateNewRecord(Img);
                 }
 
             }
@@ -57,7 +57,7 @@ namespace Application.Controllers
         public async Task<string> UploadImage(IFormFile imgFile)
         {
             string imageName = new string(Path.GetFileNameWithoutExtension(imgFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-            imageName += DateTime.Now.ToString("yymmddhhssff") + Path.GetExtension(imgFile.FileName);
+            imageName += DateTime.Now.ToString("-yy-mm-dd-hh-ss-ff") + Path.GetExtension(imgFile.FileName);
             var imgPath = Path.Combine(_hostEnv.ContentRootPath, "Images", imageName);
 
             using (var fileStream = new FileStream(imgPath, FileMode.Create))
