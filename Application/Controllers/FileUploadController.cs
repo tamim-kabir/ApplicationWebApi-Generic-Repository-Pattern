@@ -40,31 +40,55 @@ namespace Application.Controllers
 
                     foreach (var file in files)
                     {
-                        Img.ImgPath = await UploadImage(file);
+                        Img.ImgPath = await UploadFiles(file);
                     }
                     await _frepo.CreateNewRecord(Img);
                 }
-
+                return "Employee image saved";
             }
             catch (Exception e)
             {
                 throw e;
             }
-            return "Employee image saved";
         }
 
         [NonAction]
-        public async Task<string> UploadImage(IFormFile imgFile)
+        public async Task<string> UploadFiles(IFormFile file)
         {
-            string imageName = new string(Path.GetFileNameWithoutExtension(imgFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-            imageName += DateTime.Now.ToString("-yy-mm-dd-hh-ss-ff") + Path.GetExtension(imgFile.FileName);
-            var imgPath = Path.Combine(_hostEnv.ContentRootPath, "Images", imageName);
-
-            using (var fileStream = new FileStream(imgPath, FileMode.Create))
+            string[] imageExtension = { ".PNG", ".JPG", ".JPEG", ".JFIF", ".PJPEG", ".PJP", "SVG", ".WEBP ", ".HEIC" };
+            string[] FileExtension = { ".pdf", ".docx", ".xlsx", ".zip", ".rar"};
+            
+            string fileName = new string(Path.GetFileNameWithoutExtension(file.FileName).Take(20).ToArray()).Replace(' ', '-');
+            var path = Path.GetExtension(file.FileName);
+            fileName += DateTime.Now.ToString("-yy-mm-dd-hh-ss-ff") + path;
+            
+            //If images
+            foreach (var extension in imageExtension)
             {
-                await imgFile.CopyToAsync(fileStream);
+                if (Path.GetExtension(file.FileName) == extension)
+                {
+                    var imgPath = Path.Combine(_hostEnv.ContentRootPath, "Images", fileName);
+                    using (var fileStream = new FileStream(imgPath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    return fileName;
+                }
             }
-            return imageName;
+            //If File
+            foreach(var extension in FileExtension)
+            { 
+                if (Path.GetExtension(file.FileName) == extension)
+                {
+                    var filePath = Path.Combine(_hostEnv.ContentRootPath, "File", fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                    return fileName;
+                }
+            }
+            return "Wrong format File type";
         }
     }
 }
